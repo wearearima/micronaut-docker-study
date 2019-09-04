@@ -1,12 +1,17 @@
-version: '2'
+version: '3'
 
 services:
   app:
-    image: micronaut-petclinic
+    image: micronaut-petclinic-java
+    build:
+      context: .
+      dockerfile: Dockerfile.runjava
+      args:
+        JAR_FILE: ./target/micronaut-petclinic-0.1.0.BUILD-SNAPSHOT.jar
     ports:
       - "8080:8080"
     links:
-      - db      
+      - db
     environment:
       JDBC_HOST: db
       JDBC_PORT: 5432
